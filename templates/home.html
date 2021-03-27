@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+  <div class="container">
+      <h1 class="display-4">Price Alert</h1>
+      <p class="lead">We scan online store websites to alert you of price drops in items that interest you.</p>
+      <a class="btn btn-primary btn-lg" href="{{ url_for('user_blueprint.login_user') }}" role="button">Get Started</a>
+
+  </div>
+</div>
+{% endblock %}

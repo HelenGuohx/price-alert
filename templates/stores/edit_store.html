@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<header><h1>Edit Store</h1></header>
+
+<section class="edit-item-form">
+<form method="post">
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" name="name" value="{{ store.name }}" />
+    </div>
+    <div class="mb-3">
+        <label for="url_prefix" class="form-label">URL Prefix</label>
+        <input type="text" class="form-control" id="url_prefix" name="url_prefix" value="{{ store.url_prefix }} "/>
+    </div>
+    <div class="mb-3">
+        <label for="tag_name" class="form-label">Tag Name</label>
+        <input type="text" class="form-control" id="tag_name" name="tag_name" value="{{ store.tag_name }}" aria-describedby="tagNameHelp"/>
+        <small id="priceLimitHelp" class="form-text">The HTML element to find the product price</small>
+    </div>
+
+    <div class="mb-3">
+        <label for="query" class="form-label">Query</label>
+        {% for attribute, value in store.query.items() %}
+            <input type="text" class="form-control mb-1" id="attribute" name="attribute" value='{{ attribute }}' />
+            <input type="text" class="form-control mb-1" id="value" name="value" value='{{ value }}' />
+
+        {% endfor %}
+{#        <input type="text" class="form-control" id="query" name="query" value='{{ store.query }}' />#}
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+
+</section>
+
+{% endblock %}

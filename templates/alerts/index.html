@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<header>
+    <h1>All Alerts</h1>
+</header>
+<section>
+    <div class="list-group">
+        {% for alert in alerts %}
+        <div class="list-group-item">
+            <h4>Title: {{ alert.name }}</h4>
+            <p>Item Id: {{ alert.item_id }}</p>
+            <p>Price Limit: {{ alert.price_limit }}</p>
+            <a class="btn btn-secondary" href="{{ url_for('alert_blueprint.edit_alert', alert_id=alert._id) }}">Edit</a>
+
+            <a class="btn btn-danger popover-btn" href="{{ url_for('alert_blueprint.delete_alert', alert_id=alert._id) }}">Delete</a>
+{#            <div class="card popover-content" style="width: 18rem;">#}
+{#                <div class="card-body">#}
+{#                    <h3>Are you sure to delete this store?</h3>#}
+{#                    <span><a class="btn btn-light ">Cancel</a></span>#}
+{#                    <span><a class="btn btn-danger" href="{{ url_for('alert_blueprint.delete_alert', alert_id=alert._id) }}">Confirm</a></span>#}
+{#                </div>#}
+{#            </div>#}
+        </div>
+        {% endfor %}
+    </div>
+
+    <a class="btn btn-primary mt-3" href="{{ url_for('alert_blueprint.create_alert') }}">Create new</a>
+</section>
+{% endblock %}

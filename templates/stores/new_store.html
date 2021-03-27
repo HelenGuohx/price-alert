@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<header><h1>Create Store</h1></header>
+
+<section class="create-item-form">
+<form method="post">
+    <div class="mb-3">
+        <label for="name" class="form-label" >Name</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Amazon" required/>
+    </div>
+    <div class="mb-3">
+        <label for="url_prefix" class="form-label">URL Prefix</label>
+        <input type="text" class="form-control" id="url_prefix" name="url_prefix" placeholder="https://www.amazon.com" required/>
+    </div>
+    <div class="mb-3">
+        <label for="tag_name" class="form-label">Tag Name</label>
+        <input type="text" class="form-control" id="tag_name" name="tag_name" placeholder="span" aria-describedby="tagNameHelp" required/>
+        <small id="priceLimitHelp" class="form-text">The HTML element to find the product price</small>
+    </div>
+
+    <div class="mb-3">
+        <label for="query" class="form-label">Query</label>
+{#        <input type="text" class="form-control" id="query" name="query" placeholder='{"class": "product-price"}' />#}
+        <input type="text" class="form-control mb-1" id="attribute" name="attribute" placeholder="class" required/>
+        <input type="text" class="form-control mb-1" id="value" name="value" placeholder="price-num" required/>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+</section>
+
+{% endblock %}
