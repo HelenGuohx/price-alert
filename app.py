@@ -1,13 +1,17 @@
 from flask import Flask, render_template
 import os
-from views.alerts import alert_blueprint
-from views.stores import store_blueprint
-from views.users import user_blueprint
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 app = Flask(__name__)
 app.secret_key = os.urandom(64)
 app.config.update(
-    ADMIN=os.environ.get('ADMIN')
+    ADMIN=os.environ.get('ADMIN'),
+    DB_USER=os.environ.get('DB_USER'),
+    PASSWORD=os.environ.get('PASSWORD'),
+    SERVER_IP=os.environ.get('SERVER_IP')
 )
 
 
@@ -15,6 +19,10 @@ app.config.update(
 def home():
     return render_template("home.html")
 
+
+from views.alerts import alert_blueprint
+from views.stores import store_blueprint
+from views.users import user_blueprint
 
 app.register_blueprint(alert_blueprint, url_prefix="/alerts")
 app.register_blueprint(store_blueprint, url_prefix="/stores")

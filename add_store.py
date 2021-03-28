@@ -3,7 +3,7 @@ from models.alert import Alert
 from models.item import Item
 
 stores = [
-    # ["ebay", "https://www.ebay.com/", "span", {"id": "prcIsum"}],
+    # ["ebay", "https://www.ebay.com", "span", {"id": "prcIsum"}],
     # ["target", "https://www.target.com", "div", {"data-test": "product-price"}],
     ["walmart", "https://www.walmart.com", "span", {"class": "price-characteristic"}]
     ]

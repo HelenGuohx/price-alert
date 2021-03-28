@@ -1,7 +1,7 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-
+from email.header import Header
 from typing import List
 
 
@@ -20,7 +20,7 @@ class EmailDelivery:
         :return:
         """
         message = MIMEMultipart()
-        message["from"] = cls.SENDER
+        message["from"] = str(Header("Price Alert")) + cls.SENDER
         message["to"] = ", ".join(receivers)
         message["subject"] = subject
         message.attach(MIMEText(text, 'plain'))

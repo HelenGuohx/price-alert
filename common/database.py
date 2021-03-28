@@ -1,11 +1,17 @@
+import urllib.parse
 import pymongo as pymongo
 from typing import Dict
-
+import os
 
 class Database:
     # Uniform Resource Identifier
-    URI = "mongodb://127.0.0.1:27017/pricing"
-    DATABASE = pymongo.MongoClient(URI).get_default_database()
+    # URI = "mongodb://127.0.0.1:27017/pricing"
+    DB_USER = urllib.parse.quote_plus(os.environ.get('DB_USER'))
+    PASSWORD = urllib.parse.quote_plus(os.environ.get('PASSWORD'))
+    SERVER_IP = os.environ.get('SERVER_IP')
+
+    URI = "mongodb://%s:%s@%s/pricing" % (DB_USER, PASSWORD, SERVER_IP)
+    DATABASE = pymongo.MongoClient(URI)["pricing"]
 
     @staticmethod
     def insert(collection: str, data: Dict) -> None:
@@ -17,7 +23,6 @@ class Database:
 
     @staticmethod
     def find_one(collection: str, query: Dict) -> Dict:
-        # print("query", query)
         return Database.DATABASE[collection].find_one(query)
 
     @staticmethod
@@ -28,3 +33,4 @@ class Database:
     @staticmethod
     def remove(collection: str, query: Dict) -> Dict:
         return Database.DATABASE[collection].remove(query)
+
