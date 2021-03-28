@@ -11,6 +11,8 @@ pymongo = "*"
 typing = "*"
 passlib = "*"
 python-dotenv = "*"
+uwsgi = "*"
+
 [dev-packages]
 
 [requires]
