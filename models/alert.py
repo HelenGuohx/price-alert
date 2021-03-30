@@ -32,7 +32,7 @@ class Alert(Model):
         return self.item.price
 
     def notify_if_price_reached(self) -> None:
-        if self.item.price < self.price_limit:
+        if self.item.price <= self.price_limit:
             print(f"Item {self.item} has reached a price under {self.price_limit}. Latest price: {self.item.price}")
 
             EmailDelivery.send_email_by_local_smtp(
