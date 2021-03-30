@@ -20,9 +20,9 @@ def home():
     return render_template("home.html")
 
 
-from views.alerts import alert_blueprint
-from views.stores import store_blueprint
-from views.users import user_blueprint
+from controllers.alerts import alert_blueprint
+from controllers.stores import store_blueprint
+from controllers.users import user_blueprint
 
 app.register_blueprint(alert_blueprint, url_prefix="/alerts")
 app.register_blueprint(store_blueprint, url_prefix="/stores")
