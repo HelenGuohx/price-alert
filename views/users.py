@@ -40,3 +40,9 @@ def login_user():
             flash(e, 'danger')
 
     return render_template("users/login.html")
+
+
+@user_blueprint.route("/logout")
+def logout_user():
+    session["email"] = None
+    return redirect(url_for('user_blueprint.login_user'))
