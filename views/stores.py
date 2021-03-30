@@ -1,5 +1,5 @@
 import json
-from flask import Blueprint, render_template, request, redirect, url_for, session
+from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from models.store import Store
 from common.decorators import require_login, require_admain
 
@@ -25,6 +25,7 @@ def create_store():
         query = {request.form["attribute"]: request.form["value"]}
 
         Store(name, url_prefix, tag_name, query).save_to_mongo()
+        flash("success", 'success')
 
     return render_template("stores/new_store.html")
 
@@ -40,7 +41,8 @@ def edit_store(store_id):
         store.query = {request.form["attribute"]: request.form["value"]}
 
         store.save_to_mongo()
-        return redirect(url_for(".index"))
+        flash("success", 'success')
+        # return redirect(url_for(".index"))
 
     return render_template("stores/edit_store.html", store=store)
 

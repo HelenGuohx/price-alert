@@ -1,8 +1,7 @@
-from flask import Blueprint, request, render_template, redirect, url_for, session
+from flask import Blueprint, request, render_template, redirect, url_for, session, flash
 
 from models import User, Store
 from common.errors import Error
-
 
 
 user_blueprint = Blueprint("user_blueprint", __name__)
@@ -20,6 +19,7 @@ def register_user():
                 return redirect(url_for('.login_user'))
         except Error as e:
             print(e.message)
+            flash(e, 'danger')
 
     return render_template("users/register.html")
 
@@ -33,12 +33,10 @@ def login_user():
         try:
             if User.is_login_valid(email, password):
                 session["email"] = email
-
-                stores = Store.all()
-                session["stores"] = stores
-
                 return redirect(url_for('alert_blueprint.index'))
+
         except Error as e:
             print(e.message)
+            flash(e, 'danger')
 
     return render_template("users/login.html")

@@ -10,6 +10,10 @@ class RequestFailureError(Error):
     pass
 
 
+class HTMLElementNotMatched(Error):
+    pass
+
+
 class UserNotFoundError(Error):
     pass
 
@@ -22,5 +26,9 @@ class UserAlreadyExistError(Error):
     pass
 
 
-class PasswordNotMatchError(Error):
+class PasswordError(Error):
+    pass
+
+
+class PasswordNotMatchError(PasswordError):
     pass

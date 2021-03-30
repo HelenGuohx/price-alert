@@ -1,21 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
-<header><h1>Login</h1></header>
+<div class="mx-auto w-50 jumbotron">
+<header><h1>Welcome back!</h1></header>
 
 <section class="login-form">
 <form method="post">
     <div class="mb-3">
         <label for="email" class="form-label">Email</label>
-        <input type="text" class="form-control" id="email" name="email" placeholder="xxx@example.com"/>
+        <input type="text" class="form-control" id="email" name="email" placeholder="xxx@example.com" required/>
     </div>
     <div class="mb-3">
         <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="xxx"/>
+        <input type="password" class="form-control" id="password" name="password" placeholder="xxxxxx" required/>
     </div>
 
-    <button type="submit" class="btn btn-primary">Sign in</button>
+    <button type="submit" class="btn btn-primary mx-auto d-block">Log in</button>
 </form>
 
 </section>
-
+</div>
 {% endblock %}

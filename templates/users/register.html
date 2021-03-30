@@ -1,21 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="mx-auto w-50 jumbotron">
+
 <header><h1>Register</h1></header>
 
-<section class="register-form">
+<section class="register-form ">
 <form method="post">
     <div class="mb-3">
         <label for="email" class="form-label">Email</label>
-        <input type="text" class="form-control" id="email" name="email" placeholder="xxx@example.com"/>
+        <input type="text" class="form-control" id="email" name="email" placeholder="xxx@example.com" required/>
     </div>
     <div class="mb-3">
         <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="xxx"/>
+        <input type="password" class="form-control" id="password" name="password" placeholder="xxxxxx" aria-describedby="passwordHelp" required/>
+        <small id="passwordHelp" class="form-text">
+            <ul class="list-group ml-3" style="color: gray">
+                <li>At least 6 characters</li>
+                <li>Must contain letters a-z or A-Z</li>
+                <li>Must contain numbers 0-9</li>
+            </ul>
+        </small>
     </div>
 
-    <button type="submit" class="btn btn-primary">Sign up</button>
+    <button type="submit" class="btn btn-primary mx-auto d-block">Create an account</button>
 </form>
 
 </section>
-
+</div>
 {% endblock %}

@@ -1,26 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
-<header>
+<header class="pb-3">
     <h1>All Stores</h1>
+    {% if session["email"] == config.ADMIN %}
+        <a class="btn btn-primary" href="{{ url_for('store_blueprint.create_store') }}">Create</a>
+    {% endif %}
 </header>
 <section>
-    <div class="list-group">
+    <div class="row">
         {% for store in stores %}
-        <div class="list-group-item">
-            <h4>Store: {{ store.name }}</h4>
-            <p>URL Prefix: {{ store.url_prefix }}</p>
-            <p>Tag Name: {{ store.tag_name }}</p>
-            <p>Query: {{ store.query }}</p>
-            {% if session["email"] == config.ADMIN %}
-                <a class="btn btn-secondary" href="{{ url_for('store_blueprint.edit_store', store_id=store._id) }}">Edit</a>
-                <a class="btn btn-danger" href="{{ url_for('store_blueprint.delete_store', store_id=store._id) }}">Delete</a>
-            {% endif %}
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">{{ store.name }}</h4>
+                    <div class="card-text">
+        {#                <p>URL Prefix: {{ store.url_prefix }}</p>#}
+                        <p>Tag Name: {{ store.tag_name }}</p>
+                        <p>Query: {{ store.query }}</p>
+                        <a class="btn btn-info mb-2" href="{{ store.url_prefix }}" target="_blank"> Go to website</a>
+                        <div>
+                        {% if session["email"] == config.ADMIN %}
+                            <a class="btn btn-secondary" href="{{ url_for('store_blueprint.edit_store', store_id=store._id) }}">Edit</a>
+                            <a class="btn btn-danger" href="{{ url_for('store_blueprint.delete_store', store_id=store._id) }}">Delete</a>
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         {% endfor %}
     </div>
 
-{% if session["email"] == config.ADMIN %}
-    <a class="btn btn-primary mt-3" href="{{ url_for('store_blueprint.create_store') }}">Create</a>
-{% endif %}
+
+
+
 </section>
 {% endblock %}

@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-<header>
+<header class="pb-3">
     <h1>All Alerts</h1>
+    <a class="btn btn-primary" href="{{ url_for('alert_blueprint.create_alert') }}" >Create new</a>
 </header>
 <section>
     <div class="list-group">
@@ -24,6 +25,5 @@
         {% endfor %}
     </div>
 
-    <a class="btn btn-primary mt-3" href="{{ url_for('alert_blueprint.create_alert') }}">Create new</a>
 </section>
 {% endblock %}

@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import Dict, List
 import uuid
 from models import Model
-from common.errors import UserNotFoundError, InvalidEmailError, UserAlreadyExistError, PasswordNotMatchError
+from common.errors import UserNotFoundError, InvalidEmailError, UserAlreadyExistError, PasswordNotMatchError, PasswordError
 from common.utils import Utils
 
 @dataclass
@@ -23,13 +23,16 @@ class User(Model):
     def find_by_email(cls, email: str) -> "User":
         try:
             return cls.find_one_by("email", email)
-        except TypeError:
+        except TypeError as e:
+            print(e)
             raise UserNotFoundError("This email is not found")
 
     @classmethod
     def register_user(cls, email: str, password: str) -> bool:
         if not Utils.email_is_valid(email):
             raise InvalidEmailError("Wrong format of the email")
+
+        Utils.check_password(password)
 
         try:
             cls.find_by_email(email)

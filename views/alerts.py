@@ -1,9 +1,10 @@
-from flask import Blueprint, request, render_template, url_for, redirect, session
+from flask import Blueprint, request, render_template, url_for, redirect, session, flash
 from models.alert import Alert
 from models.item import Item
 from models.store import Store
 from common.decorators import require_login
 
+from common.errors import Error
 
 alert_blueprint = Blueprint("alert_blueprint", __name__)
 
@@ -23,13 +24,18 @@ def create_alert():
         item_url = request.form["item_url"]
         price_limit = float(request.form["price_limit"])
 
-        store = Store.find_by_url(item_url)
-        item = Item(item_url, store.tag_name, store.query)
-        item.load_price()
-        item.save_to_mongo()
-        Alert(alert_name, item._id, price_limit, session["email"]).save_to_mongo()
+        try:
+            store = Store.find_by_url(item_url)
+            item = Item(item_url, store.tag_name, store.query)
+            item.load_price()
+            item.save_to_mongo()
+            Alert(alert_name, item._id, price_limit, session["email"]).save_to_mongo()
+            flash("success", 'success')
+        except Error as e:
+            flash(e, 'danger')
 
-    return render_template("alerts/new_alert.html", stores=session["stores"])
+    stores = Store.all()
+    return render_template("alerts/new_alert.html", stores=stores)
 
 
 @alert_blueprint.route("/edit/<string:alert_id>", methods=["GET", "POST"])
@@ -42,7 +48,8 @@ def edit_alert(alert_id):
 
         alert.price_limit = price_limit
         alert.save_to_mongo()
-        return redirect(url_for('.index'))
+        flash("success", 'success')
+        # return redirect(url_for('.index'))
 
     return render_template("alerts/edit_alert.html", alert=alert)
 

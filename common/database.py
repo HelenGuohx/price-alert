@@ -27,7 +27,6 @@ class Database:
 
     @staticmethod
     def update(collection: str, query: Dict, data: Dict) -> None:
-
         Database.DATABASE[collection].update(query, data, upsert=True)
 
     @staticmethod
