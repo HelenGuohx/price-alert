@@ -1,9 +1,9 @@
 import uuid
-from typing import Dict, List
+from typing import Dict
 from dataclasses import dataclass, field
 
 from models import Model, Item, User
-from libs.email_delivery import EmailDelivery
+from libs.emails.mailgun import Mailgun
 
 @dataclass(eq=False)
 class Alert(Model):
@@ -35,11 +35,10 @@ class Alert(Model):
         if self.item.price <= self.price_limit:
             print(f"Item {self.item} has reached a price under {self.price_limit}. Latest price: {self.item.price}")
 
-            EmailDelivery.send_email_by_local_smtp(
+            Mailgun.send_email(
                 receivers=[self.user_email],
                 subject=f"Notification for {self.name}",
                 text=f"Your alert {self.name} has reached a price under {self.price_limit}. The latest price is {self.item.price}. Go to this address to check your item: {self.item.url}.",
-                html="<p></p>"
             )
 
 

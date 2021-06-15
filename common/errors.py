@@ -32,3 +32,7 @@ class PasswordError(Error):
 
 class PasswordNotMatchError(PasswordError):
     pass
+
+
+class EmailSendFailure(Error):
+    pass

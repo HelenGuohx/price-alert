@@ -6,9 +6,9 @@ import os
 class Database:
     # Uniform Resource Identifier
     # URI = "mongodb://127.0.0.1:27017/pricing"
-    DB_USER = urllib.parse.quote_plus(os.environ.get('DB_USER'))
-    PASSWORD = urllib.parse.quote_plus(os.environ.get('PASSWORD'))
-    SERVER_IP = os.environ.get('SERVER_IP')
+    DB_USER = urllib.parse.quote_plus(os.getenv('DB_USER'))
+    PASSWORD = urllib.parse.quote_plus(os.getenv('PASSWORD'))
+    SERVER_IP = os.getenv('SERVER_IP')
 
     URI = "mongodb://%s:%s@%s/pricing" % (DB_USER, PASSWORD, SERVER_IP)
     DATABASE = pymongo.MongoClient(URI)["pricing"]

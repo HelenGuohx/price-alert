@@ -11,7 +11,9 @@ app.config.update(
     ADMIN=os.environ.get('ADMIN'),
     DB_USER=os.environ.get('DB_USER'),
     PASSWORD=os.environ.get('PASSWORD'),
-    SERVER_IP=os.environ.get('SERVER_IP')
+    SERVER_IP=os.environ.get('SERVER_IP'),
+    MAILGUN_URL=os.getenv("MAILGUN_URL"),
+    MAILGUN_API=os.getenv("MAILGUN_API")
 )
 
 
